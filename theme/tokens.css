@@ -1,0 +1,26 @@
+/*
+ * The Domains of Dread: design tokens.
+ *
+ * Decided by the owner on 8 October 2026: black primary, white secondary, wine red for
+ * accents such as links, in the manner of the early second-edition printed books; always
+ * dark. Every part of the site takes its colours from here: the static site's stylesheet,
+ * the forum's style, and the wikis' skin (mediawiki/theme/citizen.css).
+ *
+ * Wine red has two tones because of the black ground. The wine itself is too dark to read
+ * as text on black (2.2 to 1), so text and links use the same hue made lighter (4.9 to 1,
+ * past the 4.5 to 1 that body text needs). The wine itself is for fills that carry white
+ * text (9.6 to 1), for rules, and for the logo.
+ */
+:root {
+	--tdod-black: #000000;        /* grounds */
+	--tdod-white: #ffffff;        /* text, headings */
+	--tdod-wine: #722f37;         /* the accent as a fill: buttons, rules, the logo */
+	--tdod-wine-text: #c95463;    /* the accent as text on black: links */
+	--tdod-wine-mark: #a12d40;    /* the accent in the logo on black: between the two, chosen by the owner */
+
+	/* The same accent in parts, for tools that build their own shades from a hue:
+	   oklch( 60% 0.15 15 ) is --tdod-wine-text; oklch( 40% 0.095 15 ) is --tdod-wine. */
+	--tdod-wine-hue: 15;
+	--tdod-wine-text-lightness: 60%;
+	--tdod-wine-text-chroma: 0.15;
+}

@@ -1,0 +1,14 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ $pages := .Paginate .RegularPages.ByDate.Reverse }}
+<ul class="posts">
+  {{ range $pages.Pages }}{{ partial "post-line.html" . }}{{ end }}
+</ul>
+{{ if gt $pages.TotalPages 1 }}
+<nav class="pager" aria-label="Pages">
+  <span>{{ with $pages.Prev }}<a href="{{ .URL }}">Newer</a>{{ end }}</span>
+  <span>{{ with $pages.Next }}<a href="{{ .URL }}">Older</a>{{ end }}</span>
+</nav>
+{{ end }}
+{{ end }}

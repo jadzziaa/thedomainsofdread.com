@@ -1,0 +1,72 @@
+# The Domains of Dread: the static site (front page, news, how to connect).
+# Built with Hugo 0.167.0, the version the proposal pins. No theme is installed: the templates
+# are the few files in layouts/, and the look is assets/css/site.css over ../theme/tokens.css.
+
+baseURL = "https://thedomainsofdread.com/"
+title = "The Domains of Dread"
+locale = "en-GB"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  description = "A Neverwinter Nights: Enhanced Edition roleplay server set in Ravenloft, as the second-edition books describe it."
+  # The links below are the same, in the same order, on the forum.
+  images = ["logo/tdod-icon-512.png"]
+  notice = "The Domains of Dread is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC."
+
+[[menus.main]]
+  name = "News"
+  pageRef = "/news"
+  weight = 1
+[[menus.main]]
+  name = "Forum"
+  url = "https://forum.thedomainsofdread.com/"
+  weight = 2
+[[menus.main]]
+  name = "Wiki"
+  url = "https://wiki.thedomainsofdread.com/"
+  weight = 3
+# Discord is left out until there is a permanent invite to give (the owner, 10 October 2026).
+# To bring it back: put the invite here and in LINKS of the forum style's build.py.
+# [[menus.main]]
+#   name = "Discord"
+#   url = "https://discord.gg/..."
+#   weight = 4
+[[menus.main]]
+  name = "How to connect"
+  pageRef = "/connect"
+  weight = 5
+
+[outputs]
+  home = ["html", "rss"]
+  section = ["html", "rss"]
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+# The colours and the logo are kept once, in ../theme, and brought in here.
+[[module.mounts]]
+  source = "assets"
+  target = "assets"
+[[module.mounts]]
+  source = "static"
+  target = "static"
+[[module.mounts]]
+  source = "content"
+  target = "content"
+[[module.mounts]]
+  source = "layouts"
+  target = "layouts"
+[[module.mounts]]
+  source = "../theme/tokens.css"
+  target = "assets/css/tokens.css"
+[[module.mounts]]
+  source = "../theme/logo"
+  target = "static/logo"
+  files = ["tdod-*.svg", "tdod-icon-*.png", "apple-touch-icon.png"]
+[[module.mounts]]
+  source = "../theme/logo/favicon.ico"
+  target = "static/favicon.ico"

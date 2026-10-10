@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Domains of Dread">
+  <title>The Domains of Dread</title>
+  <!-- a lancet gate -->
+  <path d="M17 59V33A30 30 0 0 1 32 7a30 30 0 0 1 15 26v26" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter"/>
+  <!-- the red moon seen through it -->
+  <circle cx="32" cy="27" r="6" fill="#a12d40"/>
+  <!-- the Mists, passing in front -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M5 42h31M25 49.5h34M9 57h30" stroke="#000" stroke-width="7"/>
+    <path d="M5 42h31M25 49.5h34M9 57h30" stroke="#fff" stroke-width="3"/>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+{{- $description := site.Params.description }}
+{{- if not .IsHome }}{{ with or .Description (.Summary | plainify | truncate 160) }}{{ $description = . }}{{ end }}{{ end }}
+<meta name="description" content="{{ $description }}">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="{{ .Permalink }}">
+{{- /* the colours first, then the site's rules: one small file */}}
+{{- $css := slice (resources.Get "css/tokens.css") (resources.Get "css/site.css") | resources.Concat "css/tdod.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- $font := resources.Get "fonts/noto-serif-medium.woff2" }}
+<link rel="preload" href="{{ $font.RelPermalink }}" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="32x32">
+<link rel="icon" href="{{ "logo/tdod-icon.svg" | relURL }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ "logo/apple-touch-icon.png" | relURL }}">
+{{- range .AlternativeOutputFormats }}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- end }}
+{{ partial "opengraph.html" . }}
+<meta name="twitter:card" content="summary">

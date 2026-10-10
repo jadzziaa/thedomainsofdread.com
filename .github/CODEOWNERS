@@ -1,0 +1,3 @@
+# Who must approve a change. While the repository is under one account, that is its owner.
+# With an organisation: `* @ORG/developers` and `/site/content/ @ORG/editors`.
+*                    @jadzziaa

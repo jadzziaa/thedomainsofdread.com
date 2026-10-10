@@ -1,0 +1,6 @@
+# The Hugo binary used to build here, and what it builds
+/site/.cache/
+/site/public/
+/site/resources/
+/site/.hugo_build.lock
+/site/.preview/

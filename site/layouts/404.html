@@ -1,0 +1,10 @@
+{{ define "main" }}
+<h1>Lost in the Mists</h1>
+<p class="lede">There is no page at this address.</p>
+<p>The wiki used to live at this address. Its pages are now at <a href="https://wiki.thedomainsofdread.com/">wiki.thedomainsofdread.com</a>, under the same names.</p>
+<ul>
+  <li><a href="{{ "/" | relURL }}">The front page</a></li>
+  <li><a href="{{ "connect/" | relURL }}">How to connect</a></li>
+  {{ range site.Menus.main }}{{ if in (slice "Forum" "Wiki") .Name }}<li><a href="{{ .URL }}">The {{ .Name | lower }}</a></li>{{ end }}{{ end }}
+</ul>
+{{ end }}

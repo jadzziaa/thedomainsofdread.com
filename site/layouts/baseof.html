@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+<a class="skip" href="#main">Skip to the text</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="site-logo" href="{{ "/" | relURL }}"><img src="{{ "logo/tdod-lockup-stacked.svg" | relURL }}" width="256" height="64" alt="{{ site.Title }}"></a>
+    <nav class="site-nav" aria-label="Site">
+      <ul>
+        {{- $page := . }}
+        {{- range site.Menus.main }}
+        <li><a href="{{ .URL }}"{{ if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+{{ block "main" . }}{{ end }}
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p>{{ site.Params.notice }}</p>
+    <p>Neverwinter Nights is a trademark of its owners. This site sets no cookies and runs no scripts.</p>
+  </div>
+</footer>
+</body>
+</html>

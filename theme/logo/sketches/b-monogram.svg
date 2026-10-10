@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Domains of Dread">
+  <title>The Domains of Dread</title>
+  <!-- two capital Ds, the second in wine behind the first -->
+  <path fill="#a12d40" fill-rule="evenodd" d="M24 16h13c13 0 21 9 21 20S50 56 37 56H24zM32 23v26h5c8 0 13-5.500 13-13s-5-13-13-13z"/>
+  <path fill="#000" d="M3 5h18c15 0 24 10 24 22.500S36 50 21 50H3z"/>
+  <path fill="#fff" fill-rule="evenodd" d="M6 8h15c13 0 21 9 21 19.500S34 47 21 47H6zM14 15v25h7c8 0 13-5.500 13-12.500S29 15 21 15z"/>
+</svg>

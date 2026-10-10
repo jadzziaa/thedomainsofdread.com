@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Domains of Dread">
+  <title>The Domains of Dread</title>
+  <!-- a waning moon -->
+  <path fill="#fff" d="M37 6A24 24 0 1 0 55 46 19.500 19.500 0 1 1 37 6z"/>
+  <!-- and what falls from it -->
+  <path fill="#a12d40" d="M46 33c-3.500 5.500-6.500 9.800-6.500 13.300a6.500 6.500 0 0 0 13 0c0-3.500-3-7.800-6.500-13.300z"/>
+</svg>

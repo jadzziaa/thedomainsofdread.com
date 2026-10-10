@@ -1,0 +1,10 @@
+{{ define "main" }}
+<article>
+  <header class="post-head">
+    <h1>{{ .Title }}</h1>
+    {{ if eq .Section "news" }}<p class="meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>{{ with .Params.author }} · {{ . }}{{ end }}</p>{{ end }}
+  </header>
+  {{ .Content }}
+  {{ with .Params.forum_topic }}<p class="discuss"><a href="{{ . }}">Discuss this on the forum</a></p>{{ end }}
+</article>
+{{ end }}

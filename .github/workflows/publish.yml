@@ -1,0 +1,101 @@
+# Builds the static site on every pull request and push, and publishes it to GitHub Pages
+# from the main branch.
+#
+# Settings it needs in the repository:
+#   Settings > Pages > Source: GitHub Actions
+#   Settings > Secrets and variables > Actions > DISCORD_WEBHOOK_URL (optional): a webhook of the
+#   announcements channel; without it the announcement step is skipped.
+name: Build and publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Pinned on purpose (docs/website-architecture.md, section 2.1). To upgrade: change both lines
+  # in one pull request and read the built pages before merging.
+  HUGO_VERSION: 0.167.0
+  HUGO_SHA256: 4d84519b9f619e6d4c3fb45a50157abeabeb724f859c60605f44c23def6e1169
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2          # the previous commit too, to see which posts are new
+      - name: Hugo ${{ env.HUGO_VERSION }}
+        run: |
+          curl -fsSL -o hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
+          echo "${HUGO_SHA256}  hugo.tar.gz" | sha256sum -c -
+          tar xzf hugo.tar.gz hugo && sudo install hugo /usr/local/bin/hugo && rm hugo hugo.tar.gz
+      - name: Build
+        run: hugo --source site --minify --panicOnWarning
+      - name: Links and scripts
+        run: python3 site/tools/check_links.py site/public
+      - name: Page weight
+        run: |
+          # the standard is under 100 kB a page without content pictures; the front page with its stylesheet, font and logo must stay under it
+          total=$(cat site/public/index.html site/public/css/*.css site/public/fonts/*.woff2 site/public/logo/tdod-lockup-stacked.svg | wc -c)
+          echo "front page with stylesheet, font and logo: ${total} bytes"
+          test "$total" -lt 100000
+      - name: New posts in this push
+        id: posts
+        if: github.event_name == 'push'
+        run: |
+          git diff --name-only --diff-filter=A HEAD~1 HEAD -- site/content/news/ | grep '\.md$' | grep -v '_index.md' > new-posts.txt || true
+          echo "count=$(wc -l < new-posts.txt)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        with:
+          path: site/public
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'push' && steps.posts.outputs.count != '0'
+        with:
+          name: new-posts
+          path: new-posts.txt
+
+  publish:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  announce:
+    needs: publish
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: new-posts
+        continue-on-error: true      # no new post in this push: nothing to announce
+      - name: Tell Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          [ -s new-posts.txt ] && [ -n "$DISCORD_WEBHOOK_URL" ] || { echo "nothing to announce"; exit 0; }
+          while read -r file; do
+            title=$(sed -n 's/^title: *//p' "$file" | head -1 | sed 's/^"\(.*\)"$/\1/')
+            slug=$(basename "$file" .md)
+            python3 -c 'import json,sys; print(json.dumps({"content": sys.argv[1] + "\nhttps://thedomainsofdread.com/news/" + sys.argv[2] + "/"}))' "$title" "$slug" > payload.json
+            curl -fsS -H 'Content-Type: application/json' -d @payload.json "$DISCORD_WEBHOOK_URL"
+          done < new-posts.txt

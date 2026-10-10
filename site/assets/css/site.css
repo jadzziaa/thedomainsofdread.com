@@ -1,0 +1,410 @@
+/*
+ * The Domains of Dread: the static site's stylesheet.
+ *
+ * Colours come from theme/tokens.css, which is joined in front of this file when the site is
+ * built (layouts/_partials/head.html). No colour is written here by value except the greys
+ * that are mixed from the two tokens below.
+ *
+ * The standard (docs/website-architecture.md, section 2.4): no scripts, system fonts for the
+ * text, one self-hosted face for headings, always dark, under 100 kB a page without pictures.
+ */
+
+@font-face {
+	font-family: "TDOD Display";
+	src: url( "../fonts/noto-serif-medium.woff2" ) format( "woff2" );
+	font-weight: 400 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	color-scheme: dark;
+	accent-color: var( --tdod-wine );
+
+	--ground: var( --tdod-black );
+	--text: var( --tdod-white );
+	--link: var( --tdod-wine-text );
+	--rule: var( --tdod-wine );
+	/* white let down on black: 7.8 to 1 for small print, and a hairline for boxes */
+	--quiet: color-mix( in srgb, var( --tdod-white ) 62%, var( --tdod-black ) );
+	--hairline: color-mix( in srgb, var( --tdod-white ) 18%, var( --tdod-black ) );
+
+	--display: "TDOD Display", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+	--body: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Charter, "Noto Serif", Georgia, serif;
+	--plain: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+	--measure: 40rem;
+	--gutter: 1rem;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	background: var( --ground );
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var( --ground );
+	color: var( --text );
+	font-family: var( --body );
+	font-size: 1.125rem;
+	line-height: 1.6;
+}
+
+.wrap {
+	max-width: calc( var( --measure ) + 2 * var( --gutter ) );
+	margin: 0 auto;
+	padding: 0 var( --gutter );
+}
+
+/* Links: the lighter wine, underlined so that colour is not the only sign */
+a {
+	color: var( --link );
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+}
+
+a:hover,
+a:focus-visible {
+	color: var( --text );
+}
+
+:focus-visible {
+	outline: 2px solid var( --link );
+	outline-offset: 3px;
+}
+
+/* Headings: the display face, white, in capitals for the two top levels as in the books */
+h1,
+h2,
+h3 {
+	font-family: var( --display );
+	font-weight: 400;
+	line-height: 1.15;
+	margin: 2.2em 0 0.6em;
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: clamp( 1.9rem, 6vw, 2.6rem );
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 1.35rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	padding-bottom: 0.35em;
+	border-bottom: 1px solid var( --rule );
+}
+
+h3 {
+	font-size: 1.3rem;
+	letter-spacing: 0.02em;
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre,
+table,
+figure {
+	margin: 0 0 1.1em;
+}
+
+ul,
+ol {
+	padding-left: 1.3em;
+}
+
+li + li {
+	margin-top: 0.3em;
+}
+
+hr {
+	border: 0;
+	border-top: 1px solid var( --rule );
+	margin: 2.5em 0;
+}
+
+blockquote {
+	margin-left: 0;
+	padding-left: 1em;
+	border-left: 2px solid var( --rule );
+	font-style: italic;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+code,
+kbd,
+pre {
+	font-family: ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+	font-size: 0.9em;
+}
+
+pre {
+	overflow-x: auto;
+	padding: 0.8em 1em;
+	border: 1px solid var( --hairline );
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: var( --plain );
+	font-size: 0.9rem;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 0.45em 0.6em;
+	border-bottom: 1px solid var( --hairline );
+	vertical-align: top;
+}
+
+th {
+	border-bottom-color: var( --rule );
+	font-weight: 600;
+}
+
+.table {
+	overflow-x: auto;
+}
+
+/* The top of every page: the logo, then the same five links in the same order as the forum and the wiki */
+.site-head {
+	border-bottom: 1px solid var( --rule );
+	margin-bottom: 2.5rem;
+}
+
+.site-head .wrap {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.6rem 1.5rem;
+	padding-top: 1rem;
+	padding-bottom: 0.9rem;
+}
+
+.site-logo {
+	display: block;
+	line-height: 0;
+}
+
+.site-logo img {
+	height: 3rem;
+	width: auto;
+}
+
+.site-nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.2rem 1.2rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.site-nav li {
+	margin: 0;
+}
+
+.site-nav a {
+	display: block;
+	padding: 0.35rem 0;
+	color: var( --text );
+	font-family: var( --display );
+	font-size: 0.95rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current] {
+	border-bottom-color: var( --link );
+}
+
+/* The front page */
+.lede {
+	font-size: 1.25rem;
+	line-height: 1.5;
+}
+
+.connect {
+	border: 1px solid var( --hairline );
+	border-top: 2px solid var( --rule );
+	padding: 1rem 1.1rem 0.2rem;
+	margin: 2rem 0;
+}
+
+.connect h2 {
+	margin-top: 0;
+	border: 0;
+	padding: 0;
+}
+
+.button {
+	display: inline-block;
+	padding: 0.5em 1.1em;
+	background: var( --tdod-wine );
+	color: var( --text );
+	font-family: var( --display );
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	text-decoration: none;
+	border: 1px solid var( --tdod-wine );
+}
+
+.button:hover,
+.button:focus-visible {
+	background: var( --ground );
+	color: var( --text );
+	border-color: var( --link );
+}
+
+/* Lists of posts */
+.posts {
+	list-style: none;
+	padding: 0;
+}
+
+.posts li {
+	margin: 0;
+	padding: 1rem 0;
+	border-bottom: 1px solid var( --hairline );
+}
+
+.posts h3 {
+	margin: 0.1em 0 0.3em;
+}
+
+.posts h3 a {
+	color: var( --text );
+	text-decoration: none;
+}
+
+.posts h3 a:hover,
+.posts h3 a:focus-visible {
+	color: var( --link );
+}
+
+.posts p {
+	margin: 0;
+	color: var( --quiet );
+}
+
+.date,
+.meta {
+	color: var( --quiet );
+	font-family: var( --plain );
+	font-size: 0.8rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.more,
+.pager {
+	font-family: var( --plain );
+	font-size: 0.9rem;
+}
+
+.pager {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: 1.5rem;
+}
+
+/* A post */
+.post-head {
+	margin-bottom: 2rem;
+}
+
+.post-head h1 {
+	margin-bottom: 0.3em;
+}
+
+.discuss {
+	margin-top: 2.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid var( --rule );
+}
+
+/* The foot of every page */
+.site-foot {
+	margin-top: 4rem;
+	border-top: 1px solid var( --hairline );
+	color: var( --quiet );
+	font-family: var( --plain );
+	font-size: 0.8rem;
+	line-height: 1.5;
+}
+
+.site-foot .wrap {
+	padding-top: 1.2rem;
+	padding-bottom: 2rem;
+}
+
+.site-foot p {
+	margin: 0 0 0.6em;
+}
+
+.skip {
+	position: absolute;
+	left: -999rem;
+}
+
+.skip:focus {
+	left: var( --gutter );
+	top: 0.5rem;
+	padding: 0.4em 0.8em;
+	background: var( --ground );
+	z-index: 1;
+}
+
+@media ( max-width: 30rem ) {
+	body {
+		font-size: 1.0625rem;
+	}
+
+	.site-logo img {
+		height: 2.6rem;
+	}
+
+	.site-nav a {
+		font-size: 0.85rem;
+	}
+}
+
+@media print {
+	:root {
+		--ground: #fff;
+		--text: #000;
+		--link: #000;
+		--quiet: #333;
+	}
+
+	.site-nav,
+	.skip {
+		display: none;
+	}
+}

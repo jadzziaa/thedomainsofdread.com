@@ -1,0 +1,20 @@
+{{ define "main" }}
+<h1>{{ site.Title }}</h1>
+<div class="lede">
+{{ .Content }}
+</div>
+<section class="connect" aria-labelledby="h-connect">
+  <h2 id="h-connect">Play</h2>
+  {{ with site.GetPage "/connect" }}<p>{{ .Description }}</p>
+  <p><a class="button" href="{{ .RelPermalink }}">How to connect</a></p>{{ end }}
+</section>
+{{ with site.GetPage "/news" }}
+<section aria-labelledby="h-news">
+  <h2 id="h-news">News</h2>
+  <ul class="posts">
+    {{ range first 5 .RegularPages.ByDate.Reverse }}{{ partial "post-line.html" . }}{{ end }}
+  </ul>
+  <p class="more"><a href="{{ .RelPermalink }}">All news</a></p>
+</section>
+{{ end }}
+{{ end }}
