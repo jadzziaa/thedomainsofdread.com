@@ -5,10 +5,11 @@
 
 The mark is the Two Ds: a white roman capital D with a wine-red one behind it and below, like
 a shadow. The owner chose it on 8 October 2026, with the lifted wine red. The letter is drawn
-here, not taken from a font. The site's name beside it is set in Noto Serif Medium (Open Font
-License) and turned into outlines, so the files need no font where they are shown.
+here, not taken from a font. The site's name beside it is set in IM Fell English (Open Font
+License), the headings' face since 14 October 2026 (Noto Serif Medium before), and turned into
+outlines, so the files need no font where they are shown.
 
-Needs fontTools, rsvg-convert and ImageMagick, and Noto Serif installed.
+Needs fontTools with brotli (the font is the static site's woff2), rsvg-convert and ImageMagick.
 """
 import os
 import subprocess
@@ -19,7 +20,7 @@ from fontTools.ttLib import TTFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WHITE, WINE, BLACK = '#ffffff', '#a12d40', '#000000'
-FONT = '/usr/share/fonts/noto/NotoSerif-Medium.ttf'
+FONT = os.path.join(HERE, '..', '..', 'site', 'assets', 'fonts', 'im-fell-english-regular.woff2')
 
 # A roman capital D on a 100-unit square: bracketed serifs on the stem, a bowl thin where it
 # joins the stem and full at its side.

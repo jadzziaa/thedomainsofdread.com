@@ -13,7 +13,7 @@ Decided by the owner on 8 October 2026: black primary, white secondary, wine red
 | `logo/choices.html` | The page the owner chose on (a private artifact) |
 | `../mediawiki/theme/` | The colours and the logo as the wikis' Citizen theme: two wiki pages and the lines for `LocalSettings.php` |
 
-The letter D of the mark is drawn in `build.py`, not taken from a font. The name beside it is set in Noto Serif Medium (SIL Open Font License) and stored as outlines.
+The letter D of the mark is drawn in `build.py`, not taken from a font. The name beside it is set in IM Fell English (SIL Open Font License), the headings' face, and stored as outlines; it was Noto Serif Medium until 14 October 2026.
 
 The same colours and logo are applied in two more places, both built from `tokens.css`:
 
