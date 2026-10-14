@@ -10,8 +10,11 @@
 {{- /* the colours first, then the site's rules: one small file */}}
 {{- $css := slice (resources.Get "css/tokens.css") (resources.Get "css/site.css") | resources.Concat "css/tdod.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-{{- $font := resources.Get "fonts/noto-serif-medium.woff2" }}
-<link rel="preload" href="{{ $font.RelPermalink }}" as="font" type="font/woff2" crossorigin>
+{{- /* the heading and text faces, fetched early; the italic is published for the stylesheet to fetch when a page uses it */}}
+{{- range slice "fonts/im-fell-english-regular.woff2" "fonts/eb-garamond.woff2" }}
+<link rel="preload" href="{{ (resources.Get .).RelPermalink }}" as="font" type="font/woff2" crossorigin>
+{{- end }}
+{{- $italic := (resources.Get "fonts/eb-garamond-italic.woff2").RelPermalink }}
 <link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="32x32">
 <link rel="icon" href="{{ "logo/tdod-icon.svg" | relURL }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ "logo/apple-touch-icon.png" | relURL }}">
