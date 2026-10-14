@@ -7,16 +7,20 @@ The front page, the news and "how to connect" of The Domains of Dread, as a Hugo
 | `hugo.toml` | The settings: title, the five links, the footer notice, and the lines that bring in `../theme` |
 | `layouts/` | The templates: the frame of every page, front page, list of posts, post or page, not-found page |
 | `assets/css/site.css` | The stylesheet. Colours come from `../theme/tokens.css`, joined in front of it at build time |
-| `assets/fonts/` | Noto Serif Medium for headings (SIL Open Font License), cut down to Latin letters |
+| `assets/fonts/` | IM Fell English for headings and EB Garamond (roman and italic) for the text (the owner, 14 October 2026), under the SIL Open Font License (the `OFL-*.txt` files), cut down to Latin letters. The same files as the forum's and the wikis' |
 | `content/` | The pages and posts, in Markdown. What is there now is sample text |
 
 Build with Hugo 0.167.0: `hugo --minify` writes the site to `public/`; `hugo server` shows it at http://localhost:1313.
 
-To remake the font file:
+To remake the EB Garamond files from the font's own variable files (github.com/google/fonts, `ofl/ebgaramond`), weights 400 to 700:
 
 ```bash
-pyftsubset /usr/share/fonts/noto/NotoSerif-Medium.ttf --unicodes="U+0020-007E,U+00A0-00FF,U+2013,U+2014,U+2018,U+2019,U+201C,U+201D,U+2026" --layout-features='kern,liga,lnum' --flavor=woff2 --output-file=assets/fonts/noto-serif-medium.woff2
+U="U+0020-007E,U+00A0-017F,U+01CE,U+2010-2027,U+2030-203A,U+2044,U+20AC,U+2122,U+2190-2193,U+2205,U+2212,U+221E"
+fonttools varLib.instancer "EBGaramond[wght].ttf" wght=400:700 -o eb.ttf
+pyftsubset eb.ttf --unicodes="$U" --layout-features='kern,liga,calt,ccmp,locl,mark,mkmk,smcp,c2sc,onum,lnum,tnum,pnum,case' --flavor=woff2 --output-file=assets/fonts/eb-garamond.woff2
 ```
+
+The italic the same way from `EBGaramond-Italic[wght].ttf`. IM Fell English is the forum's file (`phpbb/styles/tdod/theme/fonts/` of the website project).
 
 ## Publishing
 

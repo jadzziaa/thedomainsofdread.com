@@ -44,10 +44,10 @@ jobs:
         run: python3 site/tools/check_links.py site/public
       - name: Page weight
         run: |
-          # the standard is under 100 kB a page without content pictures; the front page with its stylesheet, font and logo must stay under it
+          # the standard is under 300 kB a page without content pictures, fonts included (the owner, 14 October 2026); the front page with its stylesheet, fonts and logo must stay under it
           total=$(cat site/public/index.html site/public/css/*.css site/public/fonts/*.woff2 site/public/logo/tdod-lockup-stacked.svg | wc -c)
-          echo "front page with stylesheet, font and logo: ${total} bytes"
-          test "$total" -lt 100000
+          echo "front page with stylesheet, fonts and logo: ${total} bytes"
+          test "$total" -lt 300000
       - name: New posts in this push
         id: posts
         if: github.event_name == 'push'

@@ -5,15 +5,32 @@
  * built (layouts/_partials/head.html). No colour is written here by value except the greys
  * that are mixed from the two tokens below.
  *
- * The standard (docs/website-architecture.md, section 2.4): no scripts, system fonts for the
- * text, one self-hosted face for headings, always dark, under 100 kB a page without pictures.
+ * The standard (docs/website-architecture.md, section 2.4): no scripts, self-hosted faces for the
+ * headings and the text, always dark, under 300 kB a page without pictures, fonts included.
  */
 
+/* Type (the owner, 14 October 2026): headings in IM Fell English, the look of an old printed book;
+   the text in EB Garamond, at a medium weight so that it holds on black. Both under the SIL Open Font
+   License, cut down to Latin letters. */
 @font-face {
 	font-family: "TDOD Display";
-	src: url( "../fonts/noto-serif-medium.woff2" ) format( "woff2" );
+	src: url( "../fonts/im-fell-english-regular.woff2" ) format( "woff2" );
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "TDOD Text";
+	src: url( "../fonts/eb-garamond.woff2" ) format( "woff2" );
 	font-weight: 400 700;
 	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "TDOD Text";
+	src: url( "../fonts/eb-garamond-italic.woff2" ) format( "woff2" );
+	font-weight: 400 700;
+	font-style: italic;
 	font-display: swap;
 }
 
@@ -30,7 +47,7 @@
 	--hairline: color-mix( in srgb, var( --tdod-white ) 18%, var( --tdod-black ) );
 
 	--display: "TDOD Display", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-	--body: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Charter, "Noto Serif", Georgia, serif;
+	--body: "TDOD Text", "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Charter, "Noto Serif", Georgia, serif;
 	--plain: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 	--measure: 40rem;
@@ -54,7 +71,8 @@ body {
 	background: var( --ground );
 	color: var( --text );
 	font-family: var( --body );
-	font-size: 1.125rem;
+	font-weight: 500;    /* Garamond's regular is light on black */
+	font-size: 1.25rem;  /* and small on its body: a size up reads as the old 1.125rem did */
 	line-height: 1.6;
 }
 
