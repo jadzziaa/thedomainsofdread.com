@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#000000">
 <link rel="canonical" href="{{ .Permalink }}">
 {{- /* the colours first, then the site's rules: one small file */}}
-{{- $css := slice (resources.Get "css/tokens.css") (resources.Get "css/site.css") | resources.Concat "css/tdod.css" | minify | fingerprint }}
+{{- $css := slice (resources.Get "css/tokens.css") (resources.Get "css/site.css") (resources.Get "css/mist.css") | resources.Concat "css/tdod.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 {{- /* the heading and text faces, fetched early; the italic is published for the stylesheet to fetch when a page uses it */}}
 {{- range slice "fonts/im-fell-english-regular.woff2" "fonts/eb-garamond.woff2" }}

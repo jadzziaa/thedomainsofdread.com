@@ -64,6 +64,9 @@ disableKinds = ["taxonomy", "term"]
   source = "../theme/tokens.css"
   target = "assets/css/tokens.css"
 [[module.mounts]]
+  source = "../theme/mist.css"
+  target = "assets/css/mist.css"
+[[module.mounts]]
   source = "../theme/logo"
   target = "static/logo"
   files = ["tdod-*.svg", "tdod-icon-*.png", "apple-touch-icon.png"]

@@ -1,0 +1,6 @@
+{{- /* A name the Mists still hide (the owner, 15 October 2026): {{< mist "Pbeqbin" >}} shows drifting
+fog over a blank stand-in, never the word (../theme/mist.css). This repository is public, so write the
+word in ROT13, as the wiki does; once its subject is revealed, replace the shortcode with the word. */ -}}
+{{- $w := .Get 0 -}}
+<span class="tdod-mist" tabindex="0" role="img" aria-label="A name still lost in the Mists"><span class="tdod-mist-word tdod-mist-d{{ add (mod (len $w) 6) 1 }}" aria-hidden="true">{{ replaceRE `[\p{L}]` "▒" $w }}</span></span>
+{{- /**/ -}}

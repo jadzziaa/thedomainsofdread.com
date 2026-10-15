@@ -1,0 +1,100 @@
+/*
+ * A name the Mists still hide (the owner, 15 October 2026): a domain or faith not yet re-emerged
+ * shows as a bank of white fog drifting over a blank stand-in, which cannot be selected or copied,
+ * and says "Still lost in the Mists" on hover or tap. The forum's [mist] tag (the tdod/mist
+ * extension) and the site's {{< mist >}} shortcode write the markup; the wiki has its own copy of
+ * these rules in MediaWiki:Common.css (Module:Mist). Copied into the forum's tdod.css and the
+ * site's site.css: change it here and there together.
+ *
+ * <span class="tdod-mist" tabindex="0" role="img" aria-label="A name still lost in the Mists">
+ *   <span class="tdod-mist-word tdod-mist-d3" aria-hidden="true">▒▒▒▒▒</span>
+ * </span>
+ * The tooltip is drawn by the stylesheet, so that a page's plain text (a summary, a search result)
+ * holds only the stand-in.
+ */
+.tdod-mist {
+	position: relative;
+	white-space: nowrap;
+	cursor: help;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.tdod-mist-word {
+	position: relative;
+	display: inline-block;
+	color: transparent;
+	text-shadow: 0 0 0.38em rgb( 236 239 243 / 0.5 );
+	--tdod-mist-delay: 0s;
+}
+.tdod-mist-word::before,
+.tdod-mist-word::after {
+	content: "";
+	position: absolute;
+	inset: -0.3em -0.5em;
+	pointer-events: none;
+	border-radius: 50%;
+	filter: blur( 3px );
+}
+.tdod-mist-word::before {
+	background:
+		radial-gradient( 38% 62% at 28% 52%, rgb( 236 239 243 / 0.72 ), transparent 72% ),
+		radial-gradient( 46% 58% at 72% 46%, rgb( 236 239 243 / 0.55 ), transparent 72% );
+	animation: tdod-mist-a 11s ease-in-out infinite alternate;
+	animation-delay: var( --tdod-mist-delay );
+}
+.tdod-mist-word::after {
+	background:
+		radial-gradient( 55% 75% at 50% 60%, rgb( 236 239 243 / 0.34 ), transparent 76% ),
+		radial-gradient( 30% 50% at 85% 40%, rgb( 236 239 243 / 0.55 ), transparent 70% );
+	animation: tdod-mist-b 15s ease-in-out infinite alternate;
+	animation-delay: calc( var( --tdod-mist-delay ) * -1.7 );
+}
+.tdod-mist-d1 { --tdod-mist-delay: -1s; }
+.tdod-mist-d2 { --tdod-mist-delay: -3s; }
+.tdod-mist-d3 { --tdod-mist-delay: -5s; }
+.tdod-mist-d4 { --tdod-mist-delay: -7s; }
+.tdod-mist-d5 { --tdod-mist-delay: -9s; }
+.tdod-mist-d6 { --tdod-mist-delay: -11s; }
+@keyframes tdod-mist-a {
+	from { transform: translateX( -9% ) scaleY( 0.92 ); }
+	to { transform: translateX( 9% ) scaleY( 1.06 ); }
+}
+@keyframes tdod-mist-b {
+	from { transform: translateX( 10% ) scale( 1.04 ); }
+	to { transform: translateX( -8% ) scale( 0.96 ); }
+}
+@media ( prefers-reduced-motion: reduce ) {
+	.tdod-mist-word::before,
+	.tdod-mist-word::after {
+		animation: none;
+	}
+}
+.tdod-mist::after {
+	content: "Still lost in the Mists.";
+	display: none;
+	position: absolute;
+	z-index: 10;
+	left: 0;
+	top: 100%;
+	margin-top: 6px;
+	padding: 0.4rem 0.7rem;
+	border: 1px solid #3a2a2e;
+	border-top: 2px solid var( --tdod-wine-text, #c95463 );
+	border-radius: 6px;
+	background: #111;
+	color: var( --tdod-white, #fff );
+	font-size: 0.85rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.4;
+	white-space: nowrap;
+	box-shadow: 0 8px 24px rgb( 0 0 0 / 0.5 );
+}
+.tdod-mist:hover::after,
+.tdod-mist:focus::after {
+	display: block;
+}
+.tdod-mist:focus-visible {
+	outline: 1px dotted currentColor;
+	outline-offset: 0.3em;
+}
