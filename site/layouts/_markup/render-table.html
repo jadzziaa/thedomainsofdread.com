@@ -1,0 +1,24 @@
+{{- /* A table in a page's Markdown, in a box that scrolls sideways when the table is wider than a
+phone's screen (.table in site.css), so the page itself never does */ -}}
+<div class="table">
+<table>
+  <thead>
+    {{- range .THead }}
+    <tr>
+      {{- range . }}
+      <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+      {{- end }}
+    </tr>
+    {{- end }}
+  </thead>
+  <tbody>
+    {{- range .TBody }}
+    <tr>
+      {{- range . }}
+      <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+      {{- end }}
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
+</div>

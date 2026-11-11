@@ -23,6 +23,14 @@
 </main>
 <footer class="site-foot">
   <div class="wrap">
+    {{- /* The policy pages, in the order and words of the forum's and the wikis' footers. Each is
+    linked only once it is built: a page marked draft: true is not, and site.GetPage finds nothing */}}
+    {{- $names := dict "/privacy" "Privacy" "/terms" "Terms" "/about" "About and contact" }}
+    {{- $policies := slice }}
+    {{- range slice "/privacy" "/terms" "/about" }}{{ with site.GetPage . }}{{ $policies = $policies | append . }}{{ end }}{{ end }}
+    {{- with $policies }}
+    <p class="policies">{{ range $i, $p := . }}{{ if $i }} · {{ end }}<a href="{{ $p.RelPermalink }}"{{ if eq $p $ }} aria-current="page"{{ end }}>{{ index $names $p.Path }}</a>{{ end }}</p>
+    {{- end }}
     <p>{{ site.Params.notice }}</p>
     <p>Neverwinter Nights is a trademark of its owners. This site sets no cookies{{ if eq .Kind "404" }}. This page runs one small script, to send old wiki addresses on to the wiki{{ else }}, and this page runs no scripts{{ end }}.</p>
   </div>

@@ -5,8 +5,10 @@ Every link, picture, stylesheet and font a page names on the site itself must ex
 folder, and no page may carry a script, except one inline script on the not-found page (404.html),
 which sends old wiki addresses on to the wiki because GitHub Pages cannot redirect. robots.txt must
 name the sitemap, and the sitemap must list every page but the not-found page, redirect stubs and
-the news list's later pages (/news/page/2/...). Links to other sites are listed and not fetched: the build
-must not fail because someone else's server is slow.
+the news list's later pages (/news/page/2/...). No built file may show an unfilled placeholder of
+the policy drafts, "[OWNER: ...]" (content/privacy.md, terms.md and about.md, which stay drafts until
+the owner fills them). Links to other sites are listed and not fetched: the build must not fail
+because someone else's server is slow.
 """
 import html.parser
 import os
@@ -52,6 +54,8 @@ for folder, _, files in os.walk(root):
     for name in files:
         path = os.path.join(folder, name)
         rel = os.path.relpath(path, root)
+        if name.endswith(('.html', '.xml', '.txt', '.json')) and '[OWNER:' in open(path, encoding='utf-8').read():
+            problems.append('{}: shows an unfilled [OWNER: ...] placeholder'.format(rel))
         if name.endswith('.html'):
             pages += 1
             p = Page()
