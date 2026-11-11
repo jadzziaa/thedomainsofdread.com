@@ -1,10 +1,38 @@
 {{ define "main" }}
 <h1>Lost in the Mists</h1>
 <p class="lede">There is no page at this address.</p>
-<p>The wiki used to live at this address. Its pages are now at <a href="https://wiki.thedomainsofdread.com/">wiki.thedomainsofdread.com</a>, under the same names.</p>
+<p id="wiki-moved">The wiki used to live at this address. Its pages are now at <a id="wiki-link" href="https://wiki.thedomainsofdread.com/">wiki.thedomainsofdread.com</a>, under the same names.</p>
 <ul>
   <li><a href="{{ "/" | relURL }}">The front page</a></li>
   <li><a href="{{ "connect/" | relURL }}">How to connect</a></li>
   {{ range site.Menus.main }}{{ if in (slice "Forum" "Wiki") .Name }}<li><a href="{{ .URL }}">The {{ .Name | lower }}</a></li>{{ end }}{{ end }}
 </ul>
+{{- /* The one script on the site. The wiki lived at this address until October 2026, and GitHub
+Pages cannot redirect, so an old wiki address lands here: /wiki/Page and /w/... go on to the same
+path on the wiki, /index.php?title=Page to /wiki/Page, and any other /index.php to the wiki's own.
+With scripts off the paragraph above still says where the wiki went; with them on, its link names
+the very page before the browser is sent on. tools/check_links.py allows this script, here only. */}}
+<script>
+(function () {
+  var wiki = 'https://wiki.thedomainsofdread.com';
+  var l = window.location, path = l.pathname, query = l.search, target = null;
+  if (path === '/wiki' || path === '/w' || path.indexOf('/wiki/') === 0 || path.indexOf('/w/') === 0) {
+    target = wiki + path + query + l.hash;
+  } else if (path === '/index.php') {
+    var title = new URLSearchParams(query).get('title');
+    if (title && query.split('&').length === 1) {
+      target = wiki + '/wiki/' + encodeURIComponent(title.replace(/ /g, '_')).replace(/%2F/g, '/').replace(/%3A/g, ':') + l.hash;
+    } else {
+      target = wiki + '/w/index.php' + query + l.hash;
+    }
+  }
+  if (!target) return;
+  var a = document.getElementById('wiki-link');
+  a.href = target;
+  a.textContent = target;
+  document.getElementById('wiki-moved').firstChild.nodeValue = 'This was an address on the old wiki. You are being sent on to ';
+  a.parentNode.lastChild.nodeValue = '.';
+  window.location.replace(target);
+})();
+</script>
 {{ end }}

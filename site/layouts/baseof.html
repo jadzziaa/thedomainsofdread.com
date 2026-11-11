@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="{{ site.Language.Locale }}">
 <head>
 {{ partial "head.html" . }}
 </head>
@@ -24,7 +24,7 @@
 <footer class="site-foot">
   <div class="wrap">
     <p>{{ site.Params.notice }}</p>
-    <p>Neverwinter Nights is a trademark of its owners. This site sets no cookies and runs no scripts.</p>
+    <p>Neverwinter Nights is a trademark of its owners. This site sets no cookies{{ if eq .Kind "404" }}. This page runs one small script, to send old wiki addresses on to the wiki{{ else }}, and this page runs no scripts{{ end }}.</p>
   </div>
 </footer>
 </body>

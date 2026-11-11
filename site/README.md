@@ -5,10 +5,10 @@ The front page, the news and "how to connect" of The Domains of Dread, as a Hugo
 | Path | Is |
 | --- | --- |
 | `hugo.toml` | The settings: title, the five links, the footer notice, and the lines that bring in `../theme` |
-| `layouts/` | The templates: the frame of every page, front page, list of posts, post or page, not-found page |
-| `assets/css/site.css` | The stylesheet. Colours come from `../theme/tokens.css`, joined in front of it at build time |
+| `layouts/` | The templates: the frame of every page, front page, list of posts, post or page, not-found page, and `robots.txt` (which names the sitemap) |
+| `assets/css/site.css` | The stylesheet. Colors come from `../theme/tokens.css`, joined in front of it at build time |
 | `assets/fonts/` | IM Fell English for headings and EB Garamond (roman and italic) for the text (the owner, 14 October 2026), under the SIL Open Font License (the `OFL-*.txt` files), cut down to Latin letters. The same files as the forum's and the wikis' |
-| `content/` | The pages and posts, in Markdown. What is there now is sample text |
+| `content/` | The pages and posts, in Markdown. The front page's Play box takes its short list from the front matter of `connect.md` |
 
 Build with Hugo 0.167.0: `hugo --minify` writes the site to `public/`; `hugo server` shows it at http://localhost:1313.
 
@@ -30,4 +30,4 @@ The italic the same way from `EBGaramond-Italic[wght].ttf`. IM Fell English is t
 | --- | --- |
 | `.github/workflows/publish.yml` | On every pull request and push: installs the pinned Hugo (checked against its checksum), builds, runs `tools/check_links.py`, checks the front page's weight. On the main branch: publishes to GitHub Pages, and posts a link to Discord for each news post that push added, if a webhook is set |
 | `.github/CODEOWNERS` | Who must approve a change |
-| `tools/check_links.py` | Every link, picture, stylesheet and font a built page names on the site itself must exist, and no page may carry a script |
+| `tools/check_links.py` | Every link, picture, stylesheet and font a built page names on the site itself must exist, and no page may carry a script except the not-found page's one inline script, which sends old wiki addresses (`/wiki/…`, `/w/…`, `/index.php?title=…`) on to the wiki, since GitHub Pages cannot redirect |

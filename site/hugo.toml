@@ -4,7 +4,7 @@
 
 baseURL = "https://thedomainsofdread.com/"
 title = "The Domains of Dread"
-locale = "en-GB"
+locale = "en-US"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
@@ -47,7 +47,7 @@ disableKinds = ["taxonomy", "term"]
 [markup.goldmark.renderer]
   unsafe = false
 
-# The colours and the logo are kept once, in ../theme, and brought in here.
+# The colors and the logo are kept once, in ../theme, and brought in here.
 [[module.mounts]]
   source = "assets"
   target = "assets"

@@ -5,7 +5,7 @@ The static site at [thedomainsofdread.com](https://thedomainsofdread.com/): the 
 | Folder | Holds |
 | --- | --- |
 | `site/` | The Hugo site: `content/` is the pages and posts in Markdown, `layouts/` the templates, `assets/` the stylesheet and the heading font. See `site/README.md` |
-| `theme/` | The colours (`tokens.css`) and the logo, which the forum and the wikis use too. See `theme/README.md` |
+| `theme/` | The colors (`tokens.css`) and the logo, which the forum and the wikis use too. See `theme/README.md` |
 | `.github/` | The workflow that builds and publishes, and who must approve a change |
 
 ## To post news

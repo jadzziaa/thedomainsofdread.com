@@ -5,7 +5,11 @@
 </div>
 <section class="connect" aria-labelledby="h-connect">
   <h2 id="h-connect">Play</h2>
+  {{- /* the connect page's description and its steps, shortened (its front matter) */}}
   {{ with site.GetPage "/connect" }}<p>{{ .Description }}</p>
+  {{ with .Params.steps }}<ol class="steps">
+    {{ range . }}<li>{{ . | markdownify }}</li>
+    {{ end }}</ol>{{ end }}
   <p><a class="button" href="{{ .RelPermalink }}">How to connect</a></p>{{ end }}
 </section>
 {{ with site.GetPage "/news" }}

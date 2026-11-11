@@ -9,6 +9,6 @@ The Domains of Dread now has three places of its own on the web.
 
 - **This site** carries announcements and the way in.
 - **The [forum](https://forum.thedomainsofdread.com/)** is for discussion in and out of character, for factions, and for character applications. You can sign in with Discord.
-- **The [wiki](https://wiki.thedomainsofdread.com/)** holds the setting, the rules and the systems. It has moved from the address it had before; old links still arrive.
+- **The [wiki](https://wiki.thedomainsofdread.com/)** holds the setting, the rules and the systems. It has moved from the address it had before, and a link to one of its pages there still leads to the same page.
 
 The server itself is still in development, with a full release intended for early 2027. Announcements will be posted here first.
