@@ -11,11 +11,19 @@ The Library is a picture gallery of the things that make up the server's world: 
 
 **Placeables**: 2,757 of them, from the team's own work and from community packs on the Neverwinter Vault. Search them by name, or narrow the list by theme (Crypt, Church, Village, Manor and more), by kind (lights, seating, graves and tombs and the like) and by the pack they come from. Open one to see a larger picture, its size in the game, and who made it. Each one has its own link to share.
 
+**Creatures**: 225 creature models, from black cats up, each with its size in the game.
+
+**Bestiary**: 70 of the beasts and monsters you may meet, shown as they stand in the world, with what they wear; some still wait for their picture.
+
+**People**: 24 of the world's townsfolk, tradespeople and watchmen, dressed as you will find them.
+
+**Portraits**: 48 portraits of the people, beasts and monsters of the world.
+
 Not everything the world holds is shown: some of it is kept for the Game Masters, and some waits beyond the Mists.
 
 ## What comes next
 
-More sections follow, one at a time: creatures, the people of the world, spell effects, sounds and music, and clothing.
+More sections follow, one at a time: spell effects, sounds and music, and clothing.
 
 ## Credits
 
