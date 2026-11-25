@@ -34,7 +34,11 @@ disableKinds = ["taxonomy", "term"]
 # [[menus.main]]
 #   name = "Discord"
 #   url = "https://discord.gg/..."
-#   weight = 4
+#   weight = 4 (Library has 4: renumber when Discord returns)
+[[menus.main]]
+  name = "Library"
+  pageRef = "/library"
+  weight = 4
 [[menus.main]]
   name = "How to connect"
   pageRef = "/connect"
