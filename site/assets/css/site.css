@@ -39,13 +39,15 @@
 	color-scheme: dark;
 	accent-color: var( --tdod-wine );
 
-	--ground: var( --tdod-black );
-	--text: var( --tdod-white );
+	--ground: var( --tdod-ground );
+	--surface: var( --tdod-surface );
+	--surface-raised: var( --tdod-surface-raised );
+	--text: var( --tdod-text );
+	--heading: var( --tdod-white );
 	--link: var( --tdod-wine-text );
 	--rule: var( --tdod-wine );
-	/* white let down on black: 7.8 to 1 for small print, and a hairline for boxes */
-	--quiet: color-mix( in srgb, var( --tdod-white ) 62%, var( --tdod-black ) );
-	--hairline: color-mix( in srgb, var( --tdod-white ) 18%, var( --tdod-black ) );
+	--quiet: var( --tdod-quiet );
+	--hairline: var( --tdod-hairline );
 
 	--display: "TDOD Display", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
 	--body: "TDOD Text", "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Charter, "Noto Serif", Georgia, serif;
@@ -53,6 +55,11 @@
 
 	--measure: 40rem;
 	--gutter: 1rem;
+}
+
+::selection {
+	color: #fff;
+	background-color: var( --tdod-wine );
 }
 
 *,
@@ -92,7 +99,7 @@ a {
 
 a:hover,
 a:focus-visible {
-	color: var( --text );
+	color: var( --heading );
 }
 
 :focus-visible {
@@ -100,13 +107,14 @@ a:focus-visible {
 	outline-offset: 3px;
 }
 
-/* Headings: the display face, white, in capitals for the two top levels as in the books */
+/* Headings: the display face, off-white, in capitals for the two top levels as in the books */
 h1,
 h2,
 h3 {
 	font-family: var( --display );
 	font-weight: 400;
 	line-height: 1.15;
+	color: var( --heading );
 	margin: 2.2em 0 0.6em;
 	text-wrap: balance;
 }
@@ -178,6 +186,7 @@ pre {
 pre {
 	overflow-x: auto;
 	padding: 0.8em 1em;
+	background: var( --surface-raised );
 	border: 1px solid var( --hairline );
 }
 
@@ -247,7 +256,7 @@ th {
 .site-nav a {
 	display: block;
 	padding: 0.35rem 0;
-	color: var( --text );
+	color: var( --heading );
 	font-family: var( --display );
 	font-size: 0.95rem;
 	letter-spacing: 0.14em;
@@ -269,6 +278,7 @@ th {
 }
 
 .connect {
+	background: var( --surface );
 	border: 1px solid var( --hairline );
 	border-top: 2px solid var( --rule );
 	padding: 1rem 1.1rem 0.2rem;
@@ -289,7 +299,7 @@ th {
 	display: inline-block;
 	padding: 0.5em 1.1em;
 	background: var( --tdod-wine );
-	color: var( --text );
+	color: #fff;
 	font-family: var( --display );
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
@@ -299,9 +309,9 @@ th {
 
 .button:hover,
 .button:focus-visible {
-	background: var( --ground );
-	color: var( --text );
-	border-color: var( --link );
+	background: var( --tdod-wine-hover );
+	color: #fff;
+	border-color: var( --tdod-wine-hover );
 }
 
 /* Lists of posts */
@@ -321,7 +331,7 @@ th {
 }
 
 .posts h3 a {
-	color: var( --text );
+	color: var( --heading );
 	text-decoration: none;
 }
 

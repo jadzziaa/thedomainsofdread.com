@@ -78,11 +78,11 @@
 	top: 100%;
 	margin-top: 6px;
 	padding: 0.4rem 0.7rem;
-	border: 1px solid #3a2a2e;
-	border-top: 2px solid var( --tdod-wine-text, #c95463 );
+	border: 1px solid var( --tdod-border, #464040 );
+	border-top: 2px solid var( --tdod-wine-text, #da6a76 );
 	border-radius: 6px;
-	background: #111;
-	color: var( --tdod-white, #fff );
+	background: var( --tdod-surface-float, #2a2525 );
+	color: var( --tdod-text, #e1dddd );
 	font-size: 0.85rem;
 	font-style: normal;
 	font-weight: 400;

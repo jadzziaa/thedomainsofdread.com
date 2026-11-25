@@ -11,7 +11,7 @@
 {{- if and (not .IsHome) (ne .Kind "404") }}{{ with or .Description (.Summary | plainify | replaceRE `\s+` " " | truncate 160) }}{{ $description = . }}{{ end }}{{ end }}
 <meta name="description" content="{{ $description }}">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#151313">
 {{- if ne .Kind "404" }}
 <link rel="canonical" href="{{ .Permalink }}">
 {{- end }}
